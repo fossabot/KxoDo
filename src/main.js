@@ -367,6 +367,7 @@ class ZeroApp extends ZeroFrame {
 window.page = new ZeroApp();
 
 var Home = require("./router_pages/home.vue");
+var ProjectHome = require("./router_pages/project_home.vue");
 
 //var Search = require("./router_pages/search.vue");
 
@@ -378,5 +379,6 @@ VueZeroFrameRouter.VueZeroFrameRouter_Init(window.Router, app, [
 	{ route: "search", component: Search },
 	{ route: "support-me", component: SupportMe },
 	{ route: "device-settings", component: DeviceSettings },*/
-	{ route: "", component: Home }
+	{ route: "project/:address", component: ProjectHome },
+	{ route: "", component: Home },
 ]);
