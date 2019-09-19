@@ -15,13 +15,13 @@ window.base64_publickey = "BOVHKzLh7FHFKCx0DjPj7BCFkuVH0Qcf95uh4Ns69LCRGiUkF+4tb
 window.certname = "kxoid.bit";
 
 // TODO
-//userChannelIndexMerger = "1HmJfQqTsfpdRinx3m8Kf1ZdoTzKcHfy2F";
+window.projectIndexMerger = "14xDmweTaxvstLpRXgSbhewTwQ9q74EzP3";
 
 var MarkdownIt = require("markdown-it");
 window.md = new MarkdownIt({
 	html: false,
 	linkify: true,
-	breaks: true,
+	breaks: false,
 });
 
 window.jdenticon = require("jdenticon");
@@ -262,14 +262,13 @@ class ZeroApp extends ZeroFrame {
 				this.siteInfo = siteInfo;
 				app.setSiteInfo(siteInfo);
 				
-				// TODO: set Merger permission
-				/*if(siteInfo.settings.permissions.indexOf("Merger:KxoVid") == -1) {
-					page.cmd("wrapperPermissionAdd", ["Merger:KxoVid"], function() {
-						page.addUserChannelIndexMerger();
+				if(siteInfo.settings.permissions.indexOf("Merger:KxoDo") == -1) {
+					page.cmd("wrapperPermissionAdd", ["Merger:KxoDo"], function() {
+						page.addProjectIndexMerger();
 					});
 				} else {
-					page.addUserChannelIndexMerger();
-				}*/
+					page.addProjectIndexMerger();
+				}
 
 				//app.callCallback("updateSiteInfo", siteInfo);
 				if(siteInfo.address!="1D7wRcEgh7FZktoN42VdUTekFUDr3d3kbx"&&!siteInfo.settings.own){self.cmdp("wrapperNotification",["warning","Note: This was cloned from another zite. You<br>\ncan find the original zite at this address:<br>\n 14c5LUN73J7KKMznp9LvZWkxpZFWgE1sDz."]);}
@@ -277,12 +276,11 @@ class ZeroApp extends ZeroFrame {
 			});
 	}
 
-	// TODO
-	addUserChannelIndexMerger() {
+	addProjectIndexMerger() {
 		var self = this;
 		this.cmd("mergerSiteList", [], function(sites) {
-			if(Object.keys(sites).indexOf(userChannelIndexMerger) === -1) {
-				self.cmd("mergerSiteAdd", [userChannelIndexMerger], function() {
+			if(Object.keys(sites).indexOf(window.projectIndexMerger) === -1) {
+				self.cmd("mergerSiteAdd", [window.projectIndexMerger], function() {
 					app.getUserInfo();
 					app.callCallback("update");
 					app.callCallback("navDrawerUpdate");

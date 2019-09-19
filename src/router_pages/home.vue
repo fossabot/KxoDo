@@ -11,9 +11,8 @@
 			<div class="subheading"></div>
 			<v-divider style="margin-top: 8px; margin-bottom: 12px;"></v-divider>
 			
-			<v-btn color="primary" @click="login()">Sign In with ZeroId or KxoId</v-btn>
-			<v-btn @click="register()">Register a KxoId</v-btn>
-			<a href="./?/" @click.prevent="continueToHome()">Continue to homepage</a>
+			<v-btn color="primary" @click="login()">Sign In</v-btn>
+			<v-btn flat small color="secondary" @click="continueToHome()">Continue to Homepage</v-btn>
 		</v-container>
 		<v-container role="main" aria-label="Homepage" v-else grid-list-xl class="hidden-sm-and-down">
 			<!-- Desktop -->

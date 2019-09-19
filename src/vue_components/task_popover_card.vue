@@ -1,20 +1,19 @@
 <template>
 	<v-card>
-		<v-card-title primary-title>Toolbar and Navbar</v-card-title>
+		<v-card-title primary-title v-if="!conversationType">{{ task.title }}</v-card-title>
 		<v-card-text>
-			Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-			tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
-			quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
-			consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
-			cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
-			proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
-			<br><br><small>
-				Assigned to krixano@kxoid.bit
-				<br>Due in 3 days.
+			<span v-if="conversationType" v-html="conversationType == 'task_assigned' ? '<strong>Assigned Task: ' + task.title + '</strong><br>' : ''"></span>
+			<span class="markdown" v-html="getMarkdown(task.body || '')"></span>
+			<small>
+				<span v-if="task.assigned">Assigned to <span>{{ task.assigned }}</span><br></span>
+				Due in 3 days.
 			</small>
 		</v-card-text>
 		<v-card-actions>
-			<v-btn flat color="yellow">Start Conversation</v-btn>
+			<v-btn flat color="yellow" v-if="!conversationType">Goto Conversation</v-btn>
+			<v-btn flat color="yellow" v-else>{{ task.done ? 'Unmark' : 'Mark Done' }}</v-btn>
+			<v-btn flat color="yellow">Assigned Conversations</v-btn>
+			<!--<v-btn flat color="yellow">Start Conversation</v-btn>-->
 		</v-card-actions>
 	</v-card>
 </template>
@@ -24,7 +23,7 @@
 	var searchDbQuery = require("../libs/search.js");
 
 	module.exports = {
-		props: ["userSettings", "userInfo", "langTranslation"],
+		props: ["userSettings", "userInfo", "langTranslation", "task", "conversationType"],
 		name: "task-popover-card",
 		data: () => {
 			return {
@@ -43,6 +42,9 @@
 			}
 		},
 		methods: {
+			getMarkdown: function(data) {
+				return window.md.render(data);
+			},
 			goto: function(to) {
 				Router.navigate(to);
 			},

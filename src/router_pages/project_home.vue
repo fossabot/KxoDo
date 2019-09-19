@@ -1,4 +1,4 @@
-<template><v-container style="margin: 0; padding: 0; height: 100%;" fluid>
+<template><v-container style="margin: 0; padding: 0;" fluid>
 	<v-container style="margin: 0; padding: 0;" fluid>
 		<v-toolbar dark dense prominent extended>
 			<v-layout style="padding-left: 50px; padding-right: 50px;">
@@ -17,8 +17,8 @@
 			</v-layout>
 		</v-toolbar>
 	</v-container>
-	<v-container fluid style="height: 100%;">
-		<v-tabs-items v-model="currentTab">
+	<v-container fluid fill-height>
+		<v-tabs-items v-model="currentTab" style="width: 100%;">
 			<v-tab-item v-for="tab in tabs" :key="tab.key" :id="'tab_' + tab.key" lazy>
 				<component ref="tab_view" :is="tab.component" :user-settings="userSettings" :user-info="userInfo" :lang-translation="langTranslation"></component>
 			</v-tab-item>
